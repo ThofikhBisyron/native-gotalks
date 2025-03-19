@@ -1,4 +1,4 @@
-    import { Text, View, Button, TextInput, Keyboard, TouchableWithoutFeedback } from "react-native";
+    import { Text, View, Button, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
     import { Picker } from "@react-native-picker/picker"
     import { SelectList } from "react-native-dropdown-select-list"
     import DropDownPicker from "react-native-dropdown-picker";
@@ -38,19 +38,14 @@
                         textStyle={{ fontSize: 16 }}
                     />
                     </View>
-                        
-                    
-                    
-
-                    
-    
                     <TextInput
                     placeholder="Phone Number"
                     className="w-60 h-14 bg-slate-300 pl-4 rounded-xl text-xl" 
                     keyboardType="phone-pad"/>
                 </View>
-                <Button title="Continue"/>
-                <Button title="Go to Login" onPress={() => router.back()} />
+                <TouchableOpacity className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
+                    <Text className="text-4xl">Continue</Text>
+                </TouchableOpacity>
             </View>
         </View>
         </TouchableWithoutFeedback>

@@ -2,8 +2,8 @@ import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity, View } from "react-native";
 import { useRouter } from "expo-router";
-import { Menu, Divider, PaperProvider } from "react-native-paper";
 import { useState } from "react";
+import HeaderRight from "@/components/headerRight";
 
 
 export default function TabsLayout() {
@@ -14,7 +14,6 @@ export default function TabsLayout() {
   const closeMenu = () => setVisible(false);
 
     return (
-      <PaperProvider>
         <Tabs
         screenOptions={{
           headerStyle: { backgroundColor: "#1e293b" },
@@ -31,23 +30,7 @@ export default function TabsLayout() {
             title: "Home",
             tabBarIcon: ({ color }) => <MaterialIcons name="home" size={24} color={color} />,
             headerRight: () => (
-              <View style={{ marginRight: 15 }}>
-                <Menu
-                  visible={visible}
-                  onDismiss={closeMenu}
-                  anchor={
-                    <TouchableOpacity onPress={openMenu}>
-                      <MaterialIcons name="more-vert" size={24} color="#facc15" />
-                    </TouchableOpacity>
-                  }
-                >
-                  <Menu.Item onPress={() => { closeMenu(); router.push("/otp"); }} title="Settings" />
-                  <Divider />
-                  <Menu.Item onPress={() => { closeMenu(); router.push("/login"); }} title="Profile" />
-                  <Divider />
-                  <Menu.Item onPress={() => { closeMenu(); alert("Logout berhasil"); }} title="Logout" />
-                </Menu>
-              </View>
+              <HeaderRight/>
             ),
           }}
         />
@@ -66,6 +49,5 @@ export default function TabsLayout() {
           }}
         />
     </Tabs>
-  </PaperProvider>
     )
 }

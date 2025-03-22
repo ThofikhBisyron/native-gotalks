@@ -15,7 +15,7 @@ export default function Otp() {
     }
     
     return (
-        <View className="flex-1 justify-center">
+        <View className="flex-1 justify-center bg-white dark:bg-black">
                 <Text className="text-center text-3xl mb-3">Enter Your Verification Code</Text>
                 <Text className="text-center text-xl">We have sent a verification code to</Text>
                 <Text className="text-center text-xl">{phoneumber}</Text>
@@ -31,8 +31,17 @@ export default function Otp() {
                     onChange={(text) => handleOtp(text, index)}
                     />
                     ))}
-                    
                 </View>
+                <TouchableOpacity className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10 mb-10">
+                    <Text className="text-4xl">Continue</Text>
+                </TouchableOpacity>
+                <View className="flex flex-row justify-center">
+                    <Text className="text-xl">Haven't received the code ?</Text>
+                        <TouchableOpacity>
+                            <Text className="text-xl"> Resend code</Text>
+                        </TouchableOpacity>
+                </View>
+                
         </View>
 
     )

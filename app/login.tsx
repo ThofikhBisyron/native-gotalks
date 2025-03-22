@@ -17,9 +17,9 @@
 
     return (
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss(), setOpen(false)}}>
-        <View className="flex-1 justify-center">
+        <View className="flex-1 justify-center bg-white dark:bg-black">
             <View className="flex justify-center">
-                <Text className="text-center text-3xl mb-4">Enter Your Phone Number</Text>
+                <Text className="text-center text-3xl mb-4 text-black dark:text-white">Enter Your Phone Number</Text>
                 <View className="flex flex-row mb-4 gap-4 justify-center">
                     <View className="w-32 h-14 bg-slate-300 rounded-xl text-xl" >
                     <DropDownPicker
@@ -43,7 +43,9 @@
                     className="w-60 h-14 bg-slate-300 pl-4 rounded-xl text-xl" 
                     keyboardType="phone-pad"/>
                 </View>
-                <TouchableOpacity className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
+                <TouchableOpacity
+                onPress={() => router.push("/tabs/home")} 
+                className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
                     <Text className="text-4xl">Continue</Text>
                 </TouchableOpacity>
             </View>

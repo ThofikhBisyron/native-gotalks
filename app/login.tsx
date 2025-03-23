@@ -17,7 +17,7 @@
 
     return (
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss(), setOpen(false)}}>
-        <View className="flex-1 justify-center bg-white dark:bg-black">
+        <View className="flex-1 justify-center">
             <View className="flex justify-center">
                 <Text className="text-center text-3xl mb-4 text-black dark:text-white">Enter Your Phone Number</Text>
                 <View className="flex flex-row mb-4 gap-4 justify-center">

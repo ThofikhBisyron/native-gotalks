@@ -5,13 +5,15 @@ import Otp from "./otp";
 import TabsLayout from "./tabs/_layout";
 import HomeScreen from "./tabs/home";
 import { Redirect } from "expo-router";
+import EditUsername from "./editusername";
 
 
 export default function Index() {
 
   return (
     
-      <Redirect href="/tabs/home"/>
+      // <Redirect href="/tabs/historyCall"/>
+      <EditUsername/>
     
     
   );

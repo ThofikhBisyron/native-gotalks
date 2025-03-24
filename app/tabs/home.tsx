@@ -39,7 +39,7 @@ export default function HomeScreen() {
       data={listchat}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({item, index}) => (
-        <View className="flex flex-row gap-3">
+        <View className="flex flex-row gap-3 mt-1">
           <Image 
           source={{ uri : item.image}}
           className="w-20 h-20 rounded-full ml-5"
@@ -48,13 +48,12 @@ export default function HomeScreen() {
             ${index === 0 ? "border-t-[1px]" : "" }
             ${listchat.length - 1 ? "border-b-[1px]" : ""}
             `}>
-              <Text className="text-2xl mb-1">{item.Name}</Text>
-              <Text className="w-60">{item.Chat}</Text>
+              <Text className="text-2xl mb-1 text-black dark:text-white">{item.Name}</Text>
+              <Text className="w-60 text-black dark:text-white">{item.Chat}</Text>
           </View>
         </View>
       )}
       />
-      <Text className="text-xl font-bold text-black dark:text-white">Home Page</Text>
     </View>
   );
 }

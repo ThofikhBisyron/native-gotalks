@@ -21,7 +21,7 @@ export default function TabsLayout() {
           headerTintColor: "#facc15",
           tabBarStyle: { 
             backgroundColor: "#1e293b", 
-            height: 60,
+            height: 70,
              },
           tabBarActiveTintColor: "#facc15",
           tabBarInactiveTintColor: "#94a3b8",
@@ -32,7 +32,7 @@ export default function TabsLayout() {
         <Tabs.Screen
           name="profile"
           options={{
-            title: "Profile",
+            title: "GoTalks",
             tabBarLabel: "Profile",
             tabBarIcon: ({ color }) => <MaterialIcons name="person" size={24} color={color} />,
             headerRight: () => (
@@ -46,8 +46,16 @@ export default function TabsLayout() {
             options={{
               title: "GoTalks",
               tabBarLabel: () => null,
-              tabBarIcon: ({ color }) => <MaterialIcons name="home" size={50} color={color}/>,
-              tabBarItemStyle:{height: 80, marginTop: 10},
+              tabBarIcon: ({ color }) => 
+              <MaterialIcons name="home" size={50} color={color}/>,
+              tabBarIconStyle: {
+                width: 100,
+                height: 100, 
+                borderRadius: 100, 
+                top: -30, 
+                backgroundColor: "#1e293b", 
+                
+              },
               headerRight: () => (
                 <HeaderRight/>
             ),

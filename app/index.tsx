@@ -6,6 +6,7 @@ import TabsLayout from "./tabs/_layout";
 import HomeScreen from "./tabs/home";
 import { Redirect } from "expo-router";
 import EditUsername from "./editusername";
+import HeaderChat from "@/components/headerChat";
 
 
 export default function Index() {
@@ -13,7 +14,7 @@ export default function Index() {
   return (
     
       // <Redirect href="/tabs/historyCall"/>
-      <EditUsername/>
+      <HeaderChat/>
     
     
   );

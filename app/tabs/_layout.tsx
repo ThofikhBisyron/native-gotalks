@@ -28,7 +28,7 @@ export default function TabsLayout() {
         }}
       >
 
-         {/* { Profile }  */}
+         {/* profile */}
         <Tabs.Screen
           name="profile"
           options={{
@@ -59,6 +59,18 @@ export default function TabsLayout() {
               headerRight: () => (
                 <HeaderRight/>
             ),
+          }}
+          />
+
+          <Tabs.Screen 
+          name="historyCall"
+          options={{
+            title:"GoTalks",
+            tabBarLabel: "Call",
+            tabBarIcon: ({color}) => <MaterialIcons name="history" size={24} color={color}/>,
+            headerRight:() => (
+              <HeaderRight/>
+            )
           }}
           />
 

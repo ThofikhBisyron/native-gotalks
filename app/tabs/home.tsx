@@ -1,8 +1,10 @@
+import { useRouter } from "expo-router";
 import { useState } from "react";
-import { View, Text, Image, FlatList } from "react-native";
+import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
 
 export default function HomeScreen() {
+  const router = useRouter()
   const [listchat, setListChat] = useState([
     {
       id : 1,
@@ -39,7 +41,7 @@ export default function HomeScreen() {
       data={listchat}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({item, index}) => (
-        <View className="flex flex-row gap-3 mt-1">
+        <TouchableOpacity className="flex flex-row gap-3 mt-1" onPress={() => router.push("/chat/chat")}>
           <Image 
           source={{ uri : item.image}}
           className="w-20 h-20 rounded-full ml-5"
@@ -51,7 +53,7 @@ export default function HomeScreen() {
               <Text className="text-2xl mb-1 text-black dark:text-white">{item.Name}</Text>
               <Text className="w-60 text-black dark:text-white">{item.Chat}</Text>
           </View>
-        </View>
+        </TouchableOpacity>
       )}
       />
     </View>

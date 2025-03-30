@@ -1,7 +1,9 @@
 import HeaderChat from "@/components/headerChat";
+import { MaterialIcons } from "@expo/vector-icons";
 import { useRouter } from "expo-router";
 import { useState } from "react";
-import { View } from "react-native";
+import { FlatList, View, Text, TouchableOpacity } from "react-native";
+import { TextInput } from "react-native-paper";
 
 
 
@@ -10,13 +12,13 @@ export default function Chatscreen() {
 
     const contacts = {
         id : 1,
-        name : "Hacker Girl",
+        name : "RS",
         image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTL1D8_YIJm9XpGyo81GbGPIYFGhFrBKhs0TA&s",
       };
 
     const [messages, setMessages] = useState([
         {
-            id:1,
+            id: 1,
             sender: contacts.name,
             message: "How Are You Today",
             isme: false,
@@ -36,9 +38,22 @@ export default function Chatscreen() {
         <HeaderChat 
         name={contacts.name} 
         image={contacts.image}
+        />  
+        <FlatList
+        data = {messages.reverse()}
+        renderItem={({item}) =>(
+            <View className={`my-1 ${item.isme ? "items-end" : "items-start"}`}>
+                <View className={`rounded-xl px-3 py-3 ${item.isme ? "bg-green-300" : "bg-slate-300"}`}>
+                    <Text>{item.message}</Text>
+                </View>
+            </View>
+        )}  
         />
-        <View>
-
+        <View className="flex flex-row justify-between mr-3">
+            <TextInput placeholder="Type a message" className="rounded-3xl w-96 bg-slate-300"/>
+            <TouchableOpacity className="items-center justify-center">
+                <MaterialIcons name="send" size={40}/>
+            </TouchableOpacity>
         </View>
         </View>
     )

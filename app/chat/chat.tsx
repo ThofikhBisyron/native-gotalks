@@ -41,6 +41,7 @@ export default function Chatscreen() {
         />  
         <FlatList
         data = {messages.reverse()}
+        inverted
         renderItem={({item}) =>(
             <View className={`my-1 ${item.isme ? "items-end" : "items-start"}`}>
                 <View className={`rounded-xl px-3 py-3 ${item.isme ? "bg-green-300" : "bg-slate-300"}`}>
@@ -49,8 +50,14 @@ export default function Chatscreen() {
             </View>
         )}  
         />
-        <View className="flex flex-row justify-between mr-3">
-            <TextInput placeholder="Type a message" className="rounded-3xl w-96 bg-slate-300"/>
+        <View className="flex flex-row justify-between mr-3 ml-3">
+            <TextInput mode="outlined" outlineColor="transparent" 
+            multiline={false} 
+            numberOfLines={3} 
+            placeholder="Type a message"
+            textAlignVertical="top" 
+            className="rounded-3xl w-96 bg-slate-300"
+            />
             <TouchableOpacity className="items-center justify-center">
                 <MaterialIcons name="send" size={40}/>
             </TouchableOpacity>

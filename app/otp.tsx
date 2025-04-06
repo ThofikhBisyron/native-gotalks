@@ -16,15 +16,15 @@ export default function Otp() {
     
     return (
         <View className="flex-1 justify-center bg-white dark:bg-black">
-                <Text className="text-center text-3xl mb-3">Enter Your Verification Code</Text>
-                <Text className="text-center text-xl">We have sent a verification code to</Text>
-                <Text className="text-center text-xl">{phoneumber}</Text>
+                <Text className="text-center text-3xl mb-3 text-black dark:text-white">Enter Your Verification Code</Text>
+                <Text className="text-center text-xl text-black dark:text-white">We have sent a verification code to</Text>
+                <Text className="text-center text-xl text-black dark:text-white">{phoneumber}</Text>
                 <View className="flex flex-row gap-3 justify-center m-4">
                     {otp.map((digit, index) =>
                     (
                     <TextInput
                     key={index}
-                    className="w-14 h-14 bg-slate-300 text-center"
+                    className="w-14 h-14 bg-slate-300 text-center text-black dark:text-white"
                     maxLength={1}
                     keyboardType="number-pad"
                     value={digit}
@@ -36,9 +36,9 @@ export default function Otp() {
                     <Text className="text-4xl">Continue</Text>
                 </TouchableOpacity>
                 <View className="flex flex-row justify-center">
-                    <Text className="text-xl">Haven't received the code ?</Text>
+                    <Text className="text-xl text-black dark:text-white">Haven't received the code ?</Text>
                         <TouchableOpacity>
-                            <Text className="text-xl"> Resend code</Text>
+                            <Text className="text-xl text-black dark:text-white"> Resend code</Text>
                         </TouchableOpacity>
                 </View>
                 

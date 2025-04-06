@@ -29,7 +29,7 @@ export default function HeaderRight() {
         title= "setting"
         onPress={() => {
             close()
-            router.push("/home")}
+            router.push("/settings/setting")}
         }
         />
             

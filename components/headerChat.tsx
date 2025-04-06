@@ -16,7 +16,7 @@ export default function HeaderChat({name, image}: ChatHeader) {
             <View className="flex flex-row justify-between items-center bg-[#1e293b] h-24"> 
                 <View className="flex flex-row justify-center items-center gap-3">
                     <TouchableOpacity onPress={() => router.back()} className="p-2">
-                        <MaterialIcons name="arrow-back" size={24} color={"white"}/>
+                        <MaterialIcons name="arrow-back" size={24} color={"#facc15"}/>
                     </TouchableOpacity>
                     <View className="flex flex-row items-center gap-2">
                         <Image source={{ uri: image }} className="w-20 h-20 rounded-full"/>

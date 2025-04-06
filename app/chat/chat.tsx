@@ -48,7 +48,7 @@ export default function Chatscreen() {
         renderItem={({item}) =>(
             <View className={`my-1 ${item.isme ? "items-end" : "items-start"}`}>
                 <View className={`rounded-xl px-3 py-3 ${item.isme ? "bg-green-300" : "bg-slate-300"}`}>
-                    <Text className="text-xl">{item.message}</Text>
+                    <Text className="text-xl text-black dark:text-white">{item.message}</Text>
                 </View>
             </View>
         )}  

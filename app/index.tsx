@@ -8,13 +8,14 @@ import { Redirect } from "expo-router";
 import EditUsername from "./editusername";
 import HeaderChat from "@/components/headerChat";
 import Chatscreen from "./chat/chat"
+import Setting from "./settings/setting";
 
 
 export default function Index() {
 
   return (
     
-      <Redirect href="/tabs/home"/>
+      <Home/>
       // <HomeScreen/>
     
     

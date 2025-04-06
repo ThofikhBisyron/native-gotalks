@@ -26,9 +26,9 @@ export default function HistoryCall() {
             className="w-20 h-20 rounded-full"
             />
             <View className="justify-center">
-              <Text className="text-2x font-bold">{item.name === "" ? item.phone : item.name}</Text>
+              <Text className="text-2x font-bold text-black dark:text-white">{item.name === "" ? item.phone : item.name}</Text>
               <Text 
-              className={`font-bold ${item.call === 1 || item.call === 4 ? "text-red-500" : "text-green-500"}`}>  
+              className={`font-bold text-black dark:text-white ${item.call === 1 || item.call === 4 ? "text-red-500" : "text-green-500"}`}>  
               {item.call === 1 ? "Missed Call" : 
               item.call === 2 ? "Outgoing Call" : 
               item.call === 3 ? "Received Call" : "Outgoing Missed Call"}

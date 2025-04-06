@@ -40,13 +40,13 @@
                     </View>
                     <TextInput
                     placeholder="Phone Number"
-                    className="w-60 h-14 bg-slate-300 pl-4 rounded-xl text-xl" 
+                    className="w-60 h-14 bg-slate-300 pl-4 rounded-xl text-xl text-black dark:text-white" 
                     keyboardType="phone-pad"/>
                 </View>
                 <TouchableOpacity
                 onPress={() => router.push("/tabs/home")} 
                 className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
-                    <Text className="text-4xl">Continue</Text>
+                    <Text className="text-4xl text-black dark:text-white">Continue</Text>
                 </TouchableOpacity>
             </View>
         </View>

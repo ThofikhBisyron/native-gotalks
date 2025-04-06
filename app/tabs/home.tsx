@@ -33,7 +33,7 @@ export default function HomeScreen() {
         mode="outlined"
         outlineColor="transparent"
         placeholder="Search Chat"
-        className="bg-slate-300 rounded-full mr-5 ml-5 mt-5 mb-3"
+        className="bg-slate-300 rounded-full mr-5 ml-5 mt-5 mb-3 text-black dark:text-white"
         style={{ height: 40}}
         />
       </View>

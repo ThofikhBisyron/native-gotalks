@@ -7,7 +7,7 @@ import HomeScreen from "./tabs/home";
 import { Redirect } from "expo-router";
 import EditUsername from "./editusername";
 import HeaderChat from "@/components/headerChat";
-import Chatscreen from "./chat/chat"
+import Chatscreen from "./chat/[id]"
 import Setting from "./settings/setting";
 
 

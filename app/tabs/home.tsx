@@ -41,7 +41,7 @@ export default function HomeScreen() {
       data={listchat}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({item, index}) => (
-        <TouchableOpacity className="flex flex-row gap-3 mt-1" onPress={() => router.push("/chat/chat")}>
+        <TouchableOpacity className="flex flex-row gap-3 mt-1" onPress={() => router.push("/chat/1")}>
           <Image 
           source={{ uri : item.image}}
           className="w-20 h-20 rounded-full ml-5"

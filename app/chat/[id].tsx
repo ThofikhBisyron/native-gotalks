@@ -1,6 +1,6 @@
 import HeaderChat from "@/components/headerChat";
 import { MaterialIcons } from "@expo/vector-icons";
-import { useRouter } from "expo-router";
+import { useLocalSearchParams, useRouter } from "expo-router";
 import { useState } from "react";
 import { FlatList, View, Text, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
@@ -8,6 +8,7 @@ import { TextInput } from "react-native-paper";
 
 
 export default function Chatscreen() {
+    const id = useLocalSearchParams()
     const router = useRouter()
 
     const contacts = {

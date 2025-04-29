@@ -10,6 +10,7 @@ import HeaderChat from "@/components/headerChat";
 import Chatscreen from "./chat/[id]"
 import Setting from "./settings/setting";
 import Opening from "./opening";
+import Getstarted from "./getstarted";
 
 
 
@@ -17,7 +18,7 @@ export default function Index() {
 
   return (
     
-      <Opening/>
+      <Getstarted/>
       // <HomeScreen/>
     
     

@@ -9,13 +9,15 @@ import EditUsername from "./editusername";
 import HeaderChat from "@/components/headerChat";
 import Chatscreen from "./chat/[id]"
 import Setting from "./settings/setting";
+import Opening from "./opening";
+
 
 
 export default function Index() {
 
   return (
     
-      <Home/>
+      <Opening/>
       // <HomeScreen/>
     
     

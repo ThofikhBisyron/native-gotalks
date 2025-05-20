@@ -4,9 +4,13 @@
     import DropDownPicker from "react-native-dropdown-picker";
     import { useRouter } from "expo-router";
     import { useState } from "react";
+    import { ActivityIndicator } from "react-native";
 
 
     export default function Login() {
+        const apiUrl = process.env.EXPO_PUBLIC_API_URL;
+        console.log(apiUrl)
+        const [loading, setLoading] = useState(false)
         const router = useRouter()
         const [selcountry, setSelCountry] = useState("+62")
         const [open, setOpen] = useState(false);
@@ -14,11 +18,22 @@
             { label: "🇮🇩 +62", value: "+62" },
             { label: "🇺🇸 +1", value: "+1" }
         ]);
+        const loginOrRegister = async () => {
+            setLoading(true)
+        }
+
 
     return (
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss(), setOpen(false)}}>
         <View className="flex-1 justify-center">
             <View className="flex justify-center">
+                <Text className="text-center text-3xl mb-4 text-black dark:text-white">Enter Your Email</Text>
+                <View className="flex flex-row justify-center mb-4">
+                    <TextInput 
+                    placeholder="Email"
+                    className="w-96 h-14 bg-slate-300 pl-4 rounded-xl text-xl text-black dark:text-white"
+                    />
+                </View>
                 <Text className="text-center text-3xl mb-4 text-black dark:text-white">Enter Your Phone Number</Text>
                 <View className="flex flex-row mb-4 gap-4 justify-center">
                     <View className="w-32 h-14 bg-slate-300 rounded-xl text-xl" >
@@ -44,9 +59,11 @@
                     keyboardType="phone-pad"/>
                 </View>
                 <TouchableOpacity
-                onPress={() => router.push("/tabs/home")} 
+                onPress={loginOrRegister}
+                disabled={loading}
                 className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
-                    <Text className="text-4xl text-black dark:text-white">Continue</Text>
+                    {loading ? (<ActivityIndicator size="large" color="black"/>) :
+                    (<Text className="text-4xl text-black dark:text-white">Continue</Text>)}           
                 </TouchableOpacity>
             </View>
         </View>

@@ -18,7 +18,11 @@
             { label: "🇮🇩 +62", value: "+62" },
             { label: "🇺🇸 +1", value: "+1" }
         ]);
+
+        const [email, setEmail] = useState("")
+        const [phone, setPhone] = useState("")
         const loginOrRegister = async () => {
+
             setLoading(true)
         }
 
@@ -55,6 +59,8 @@
                     </View>
                     <TextInput
                     placeholder="Phone Number"
+                    value={phone}
+                    onChangeText={setPhone}
                     className="w-60 h-14 bg-slate-300 pl-4 rounded-xl text-xl text-black dark:text-white" 
                     keyboardType="phone-pad"/>
                 </View>

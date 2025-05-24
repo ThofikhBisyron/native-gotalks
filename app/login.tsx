@@ -34,6 +34,8 @@
                 <Text className="text-center text-3xl mb-4 text-black dark:text-white">Enter Your Email</Text>
                 <View className="flex flex-row justify-center mb-4">
                     <TextInput 
+                    value={email}
+                    onChangeText={setEmail}
                     placeholder="Email"
                     className="w-96 h-14 bg-slate-300 pl-4 rounded-xl text-xl text-black dark:text-white"
                     />

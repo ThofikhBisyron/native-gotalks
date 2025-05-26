@@ -5,6 +5,9 @@
     import { useRouter } from "expo-router";
     import { useState } from "react";
     import { ActivityIndicator } from "react-native";
+    import { useDispatch } from "react-redux";
+    import Toast from "react-native-toast-message";
+    import { Alert } from "react-native";
 
 
     export default function Login() {
@@ -13,17 +16,56 @@
         const [loading, setLoading] = useState(false)
         const router = useRouter()
         const [selcountry, setSelCountry] = useState("+62")
+        console.log(selcountry)
         const [open, setOpen] = useState(false);
         const [items, setItems] = useState([
             { label: "🇮🇩 +62", value: "+62" },
             { label: "🇺🇸 +1", value: "+1" }
         ]);
+        const dispatch = useDispatch()
 
         const [email, setEmail] = useState("")
         const [phone, setPhone] = useState("")
-        const loginOrRegister = async () => {
-
+        
+        const loginOrRegister = async () => {   
+            
+            if (!email || !phone){
+                Toast.show({
+                    type: 'error',
+                    text1: "Email or Phone Number Required",
+                    
+                })
+                return
+            }
+            
             setLoading(true)
+            try{
+                const response = await fetch(`${apiUrl}/user/register`, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify({
+                        email,
+                        phone_number: selcountry + phone,
+                        
+                    })
+                })
+                console.log(selcountry + phone)
+                const data = await response.json()
+                console.log(data)
+                
+                if (response.ok) {
+                    router.push("/otp")
+                } else {
+                    setLoading(false)
+                    Alert.alert("error", data.message)
+                }
+                
+            }catch (err){
+                 setLoading(false)
+                Alert.alert("error")
+            }
         }
 
 

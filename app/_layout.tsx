@@ -1,7 +1,6 @@
 import { Stack } from "expo-router"
 import { PaperProvider } from "react-native-paper"
 import "../global.css";
-import Toast from "react-native-toast-message";
 import { View, useColorScheme } from "react-native"
 import { Provider } from "react-redux"
 import { PersistGate} from "redux-persist/integration/react"
@@ -23,7 +22,6 @@ export default function RootLayout() {
               />
           </View>
         </PaperProvider>
-        <Toast/>
        </PersistGate>
     </Provider>
   );

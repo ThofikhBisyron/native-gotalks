@@ -6,7 +6,6 @@
     import { useState } from "react";
     import { ActivityIndicator } from "react-native";
     import { useDispatch } from "react-redux";
-    import Toast from "react-native-toast-message";
     import { Alert } from "react-native";
 
 
@@ -29,14 +28,7 @@
         
         const loginOrRegister = async () => {   
             
-            if (!email || !phone){
-                Toast.show({
-                    type: 'error',
-                    text1: "Email or Phone Number Required",
-                    
-                })
-                return
-            }
+            
             
             setLoading(true)
             try{

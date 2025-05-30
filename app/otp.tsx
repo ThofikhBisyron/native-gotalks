@@ -4,21 +4,26 @@ import { Text, View, Button, TextInput, Keyboard, TouchableWithoutFeedback, Touc
 
 
 export default function Otp() {
-    const [phoneumber, setPhoneNumber] = useState("+6288888888")
+    const [email, setEmail] = useState("syaifania.raisya@gmail.com")
     const [otp, setOtp] = useState(["", "", "", ""])
-
-    const handleOtp = (text : any, index : any) => {
+    
+    const handleOtp = (text : string, index : number) => {
         let newOtp = [...otp];
         newOtp[index] = text;
         setOtp(newOtp)
+        
+    }
 
+    const submitOtp = async () => {
+        const codeOtp = otp.join("")
+        console.log(codeOtp)
     }
     
     return (
         <View className="flex-1 justify-center bg-white dark:bg-black">
                 <Text className="text-center text-3xl mb-3 text-black dark:text-white">Enter Your Verification Code</Text>
                 <Text className="text-center text-xl text-black dark:text-white">We have sent a verification code to</Text>
-                <Text className="text-center text-xl text-black dark:text-white">{phoneumber}</Text>
+                <Text className="text-center text-xl text-black dark:text-white">{email}</Text>
                 <View className="flex flex-row gap-3 justify-center m-4">
                     {otp.map((digit, index) =>
                     (
@@ -28,11 +33,11 @@ export default function Otp() {
                     maxLength={1}
                     keyboardType="number-pad"
                     value={digit}
-                    onChange={(text) => handleOtp(text, index)}
+                    onChangeText={(text) => handleOtp(text, index)}
                     />
                     ))}
                 </View>
-                <TouchableOpacity className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10 mb-10">
+                <TouchableOpacity onPress={submitOtp} className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10 mb-10">
                     <Text className="text-4xl">Continue</Text>
                 </TouchableOpacity>
                 <View className="flex flex-row justify-center">

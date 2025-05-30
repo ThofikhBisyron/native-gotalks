@@ -1,11 +1,12 @@
     import { Text, View, Button, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
     import { Picker } from "@react-native-picker/picker"
     import { SelectList } from "react-native-dropdown-select-list"
-    import DropDownPicker from "react-native-dropdown-picker";
-    import { useRouter } from "expo-router";
-    import { useState } from "react";
-    import { ActivityIndicator } from "react-native";
-    import { Alert } from "react-native";
+    import DropDownPicker from "react-native-dropdown-picker"
+    import { useRouter } from "expo-router"
+    import { useState } from "react"
+    import { ActivityIndicator } from "react-native"
+    import { Alert } from "react-native"
+    import Toast from 'react-native-toast-message'
 
 
     export default function Login() {
@@ -28,7 +29,12 @@
         const loginOrRegister = async () => {   
             
             if (!email || !phone) {
-                
+                Toast.show({
+                type: 'general',
+                text1: "Warning",
+                text2: "Email and phone number must be filled in",
+            })
+            return
             }
             
             setLoading(true)
@@ -49,7 +55,13 @@
                 console.log(data)
                 
                 if (response.ok) {
-                    // router.push("/otp")
+                    Toast.show({
+                        type: "general",
+                        text1: "Success",
+                        text2: "The OTP code has been sent via email, please check your spam folder if you do not receive the email.",
+                        autoHide: false,
+                    })
+                    router.push("/otp")
                 } else {
                     setLoading(false)
                     Alert.alert("error", data.message)
@@ -60,7 +72,6 @@
                 Alert.alert("error")
             }
         }
-
 
     return (
         <TouchableWithoutFeedback onPress={() => {Keyboard.dismiss(), setOpen(false)}}>

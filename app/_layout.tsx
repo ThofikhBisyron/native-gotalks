@@ -5,8 +5,9 @@ import { View, useColorScheme } from "react-native"
 import { Provider } from "react-redux"
 import { PersistGate} from "redux-persist/integration/react"
 import { store, persistor } from "../redux/store"
-// import { InAppNotificationProvider } from 'react-native-in-app-notification'
-// import Notification from "../components/notification"
+import Toast from 'react-native-toast-message';
+import { toastConfig } from '../components/toastConfig';
+
 
 export default function RootLayout() {
   const colorScheme = useColorScheme();
@@ -15,7 +16,6 @@ export default function RootLayout() {
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
         <PaperProvider>
-          
             <View className={`flex-1 ${colorScheme === "dark" ? "bg-black" : "bg-white"}`}>
                 <Stack
                   screenOptions={{
@@ -24,7 +24,7 @@ export default function RootLayout() {
                   }}
                   />
             </View>
-
+            <Toast config={toastConfig} />
         </PaperProvider>
        </PersistGate>
     </Provider>

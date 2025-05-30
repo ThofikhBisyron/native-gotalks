@@ -11,6 +11,7 @@ import Chatscreen from "./chat/[id]"
 import Setting from "./settings/setting";
 import Opening from "./opening";
 import Getstarted from "./getstarted";
+import Notification from "../components/notification";
 
 
 
@@ -18,7 +19,7 @@ export default function Index() {
 
   return (
     
-      <Getstarted/>
+      <Login/>
       // <HomeScreen/>
     
     

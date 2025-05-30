@@ -5,7 +5,6 @@
     import { useRouter } from "expo-router";
     import { useState } from "react";
     import { ActivityIndicator } from "react-native";
-    import { useDispatch } from "react-redux";
     import { Alert } from "react-native";
 
 
@@ -21,14 +20,16 @@
             { label: "🇮🇩 +62", value: "+62" },
             { label: "🇺🇸 +1", value: "+1" }
         ]);
-        const dispatch = useDispatch()
+
 
         const [email, setEmail] = useState("")
         const [phone, setPhone] = useState("")
         
         const loginOrRegister = async () => {   
             
-            
+            if (!email || !phone) {
+                
+            }
             
             setLoading(true)
             try{
@@ -48,7 +49,7 @@
                 console.log(data)
                 
                 if (response.ok) {
-                    router.push("/otp")
+                    // router.push("/otp")
                 } else {
                     setLoading(false)
                     Alert.alert("error", data.message)

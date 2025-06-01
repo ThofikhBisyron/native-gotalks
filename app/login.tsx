@@ -7,26 +7,31 @@
     import { ActivityIndicator } from "react-native"
     import { Alert } from "react-native"
     import Toast from 'react-native-toast-message'
+    import { useDispatch, useSelector } from "react-redux"
+    import { RootState } from '../redux/store'
+    import { login } from "@/redux/reducers/auth"
 
 
     export default function Login() {
+        const dataUser = useSelector((state:RootState) => state.auth.user)
         const apiUrl = process.env.EXPO_PUBLIC_API_URL;
-        console.log(apiUrl)
         const [loading, setLoading] = useState(false)
         const router = useRouter()
         const [selcountry, setSelCountry] = useState("+62")
-        console.log(selcountry)
         const [open, setOpen] = useState(false);
         const [items, setItems] = useState([
             { label: "🇮🇩 +62", value: "+62" },
             { label: "🇺🇸 +1", value: "+1" }
         ]);
+        const dispatch = useDispatch() 
 
 
         const [email, setEmail] = useState("")
         const [phone, setPhone] = useState("")
+
         
         const loginOrRegister = async () => {   
+            const lowerCase = email.toLocaleLowerCase()
             
             if (!email || !phone) {
                 Toast.show({
@@ -45,16 +50,15 @@
                         "Content-Type": "application/json"
                     },
                     body: JSON.stringify({
-                        email,
+                        email: lowerCase,
                         phone_number: selcountry + phone,
                         
                     })
                 })
-                console.log(selcountry + phone)
                 const data = await response.json()
-                console.log(data)
                 
                 if (response.ok) {
+                    dispatch(login({user: data.user, token: null}))
                     Toast.show({
                         type: "general",
                         text1: "Success",
@@ -64,12 +68,20 @@
                     router.push("/otp")
                 } else {
                     setLoading(false)
-                    Alert.alert("error", data.message)
+                    Toast.show({
+                        type: "general",
+                        text1: "Warning",
+                        text2: data.message
+                    })
                 }
                 
             }catch (err){
-                 setLoading(false)
-                Alert.alert("error")
+                setLoading(false)
+                Toast.show({
+                    type: "general",
+                    text1: "Warning",
+                    text2: "Server is under maintenance"
+                })
             }
         }
 

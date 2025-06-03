@@ -1,4 +1,4 @@
-import { configureStore, getDefaultMiddleware } from "@reduxjs/toolkit";
+import { configureStore, } from "@reduxjs/toolkit";
 import { persistReducer, persistStore } from "redux-persist";
 import reducer from "./reducers";
 import AsyncStorage from "@react-native-async-storage/async-storage";
@@ -28,3 +28,5 @@ export const store  = configureStore({
 })
 
 export const persistor = persistStore(store)
+export type RootState = ReturnType<typeof store.getState>
+export type AppDispatch = typeof store.dispatch

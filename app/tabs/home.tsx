@@ -2,8 +2,14 @@ import { useRouter } from "expo-router";
 import { useState } from "react";
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native";
 import { TextInput } from "react-native-paper";
+import { useSelector } from "react-redux";
+import { RootState } from "@/redux/store";
 
 export default function HomeScreen() {
+  const dataUser = useSelector((state : RootState) => state.auth.user)!
+  const token = useSelector((state : RootState) => state.auth.token)!
+  console.log(dataUser)
+  console.log(token)
   const router = useRouter()
   const [listchat, setListChat] = useState([
     {

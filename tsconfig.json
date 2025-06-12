@@ -16,5 +16,5 @@
     "expo-env.d.ts",
     "nativewind-env.d.ts",
     "declarations.d.ts"
-  ]
+, "redux/store.js"  ]
 }

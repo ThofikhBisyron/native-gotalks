@@ -3,7 +3,7 @@
     import { SelectList } from "react-native-dropdown-select-list"
     import DropDownPicker from "react-native-dropdown-picker"
     import { useRouter } from "expo-router"
-    import { useState } from "react"
+    import { useState, useEffect } from "react"
     import { ActivityIndicator } from "react-native"
     import { Alert } from "react-native"
     import Toast from 'react-native-toast-message'
@@ -14,6 +14,8 @@
 
     export default function Login() {
         const dataUser = useSelector((state:RootState) => state.auth.user)
+        const token = useSelector((state:RootState) => state.auth.token)!
+        console.log(token)
         const apiUrl = process.env.EXPO_PUBLIC_API_URL;
         const [loading, setLoading] = useState(false)
         const router = useRouter()
@@ -24,6 +26,15 @@
             { label: "🇺🇸 +1", value: "+1" }
         ]);
         const dispatch = useDispatch() 
+
+         useEffect(() => {
+            if (token){
+                const timeout = setTimeout(() => {
+                    router.push("/tabs/home")
+                }, 0)
+                return () => clearTimeout(timeout)
+            }
+        }, [])
 
 
         const [email, setEmail] = useState("")

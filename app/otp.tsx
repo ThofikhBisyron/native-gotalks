@@ -1,4 +1,4 @@
-import { useState, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { Text, View, Button, TextInput, Keyboard, TouchableWithoutFeedback, TouchableOpacity } from "react-native";
 import { useDispatch, useSelector } from "react-redux";
 import { RootState } from "@/redux/store";
@@ -13,13 +13,20 @@ export default function Otp() {
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const dataUser = useSelector((state : RootState) => state.auth.user)!
     const token = useSelector((state : RootState) => state.auth.token)!
-    console.log(dataUser)
-    console.log(token)
     const [loading, setLoading] = useState(false)
     const [otp, setOtp] = useState(["", "", "", ""])
     const inputRefs = useRef<Array<TextInput | null>>([])
     const dispatch = useDispatch()
     const router = useRouter()
+
+    useEffect(() => {
+        if (token){
+            const timeout = setTimeout(() => {
+                router.push("/tabs/home")
+            }, 0)
+            return () => clearTimeout(timeout)
+        }
+    }, [])
     
     const handleOtp = (text : string, index : number) => {
         let newOtp = [...otp];
@@ -43,7 +50,6 @@ export default function Otp() {
 
     const submitOtp = async () => {
         const codeOtp = otp.join("")
-        console.log(codeOtp)
         if (codeOtp.length < otp.length){
             Toast.show({
                 type: "general",
@@ -73,7 +79,7 @@ export default function Otp() {
                     text1: "Success",
                     text2: data.message
                 })
-                router.push("/tabs/home")
+                router.push("/editusername")
             }else {
                 setLoading(false)
                 Toast.show({
@@ -100,21 +106,25 @@ export default function Otp() {
                     "Content-Type": "application/json"
                 },
                 body: JSON.stringify({
-                    email: dataUser?.email,
-                    phone_number: dataUser?.phoneNumber
+                    email: dataUser.email,
+                    phone_number: dataUser.phoneNumber
                 })
             })
-
+            const data = await response.json()
             if (response.ok){
                 setLoading(false)
                 Toast.show({
                     type: "general",
                     text1: "Warning",
-                    text2: "Server is under maintenance"
+                    text2: "The OTP code has been sent via email, please check your spam folder if you do not receive the email."
                 })
             }
         }catch(err){
-
+            Toast.show({
+                type: "general",
+                text1: "Warning",
+                text2: "Server is under maintenance"
+            })
         }
     }
     
@@ -141,13 +151,15 @@ export default function Otp() {
                 onPress={submitOtp} 
                 disabled={loading}
                 className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10 mb-10">
-                    {loading ? (<ActivityIndicator size={"large"} color={"black"}/>) :
-                    <Text className="text-4xl">Continue</Text>}
-                    
+                {loading ? 
+                (<ActivityIndicator size={"large"} color={"black"}/>) :
+                <Text className="text-4xl">Continue</Text>}
                 </TouchableOpacity>
                 <View className="flex flex-row justify-center">
                     <Text className="text-xl text-black dark:text-white">Haven't received the code ?</Text>
-                        <TouchableOpacity>
+                        <TouchableOpacity
+                        onPress={submitResendCode}
+                        >
                             <Text className="text-xl text-black dark:text-white"> Resend code</Text>
                         </TouchableOpacity>
                 </View>

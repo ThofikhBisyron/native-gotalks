@@ -7,7 +7,7 @@ import HomeScreen from "./tabs/home";
 import { Redirect } from "expo-router";
 import EditUsername from "./editusername";
 import HeaderChat from "@/components/headerChat";
-import Chatscreen from "./chat/[id]"
+import Chatscreen from "./chat/[type]/[id]"
 import Setting from "./settings/setting";
 import Opening from "./opening";
 import Getstarted from "./getstarted";
@@ -18,7 +18,7 @@ export default function Index() {
 
   return (
     
-      <Getstarted/>
+      <EditUsername/>
       // <HomeScreen/>
     
     

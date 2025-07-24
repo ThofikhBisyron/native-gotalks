@@ -9,11 +9,8 @@ import MaterialIcons from '@expo/vector-icons/MaterialIcons'
 
 export default function HomeScreen() {
   const token = useSelector((state : RootState) => state.auth.token)!
-
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const [chatlist, setChatlist] = useState<ChatItem[]>([])
-  console.log(token)
-  console.log(chatlist)
   const router = useRouter()
 
   useEffect(() => {

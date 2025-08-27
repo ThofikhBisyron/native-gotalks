@@ -45,6 +45,7 @@ export default function HomeScreen() {
         },
       })
       const data = await response.json()
+      console.log(data)
       if (response.ok){
         setChatlist(data.data)
       }
@@ -72,7 +73,7 @@ export default function HomeScreen() {
       data={chatlist}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({item, index}) => {
-        const imageUri = item.type === 'user' ? item.image : item.group_image ? `${apiUrl}/${item.group_image}` : null
+        const imageUri = item.type === 'user' ? item.image : item.group_image ? item.group_image : null
         return(
         <TouchableOpacity className="flex flex-row gap-3 mt-1" 
         onPress={() => router.push({
@@ -81,7 +82,7 @@ export default function HomeScreen() {
             type: item.type,
             id: item.target_id.toString(),
             name : item.type === "user" ? item.target_name : item.group_name,
-            image: item.type === "user" ? item.image : item.group_image ? `${apiUrl}/${item.group_image}` : null
+            image: item.type === "user" ? item.image : item.group_image ? item.group_image : null
           },
         }
         )}>

@@ -1,10 +1,22 @@
 import { View, Text, TouchableOpacity } from "react-native"
 import { useRouter } from "expo-router"
 import { MotiText } from "moti";
-
+import { useSelector } from "react-redux"
+import { RootState } from '../redux/store'
+import { useEffect } from "react";
 
 export default function Getstarted() {
-    const route = useRouter()
+    const router = useRouter()
+    const token = useSelector((state : RootState) => state.auth.token)!
+    
+    useEffect(() => {
+        if (token){
+            const timeout = setTimeout(() => {
+                router.push("/tabs/home")
+            }, 0)
+            return () => clearTimeout(timeout)
+        }
+    }, [])
 
 
     return(
@@ -17,7 +29,7 @@ export default function Getstarted() {
         }} className="text-[#facc15] font-bold text-4xl text-center">
         Communicate With Everyone In The World and Know Their Location With GoTalks
         </MotiText>
-        <TouchableOpacity className="border-1 bg-slate-300 mt-20 rounded-2xl p-3" onPress={() => route.push("/login")}>         
+        <TouchableOpacity className="border-1 bg-slate-300 mt-20 rounded-2xl p-3" onPress={() => router.push("/login")}>         
             <Text className="text-[#facc15] font-bold text-4xl ">Get Started</Text>
         </TouchableOpacity>
     </View>

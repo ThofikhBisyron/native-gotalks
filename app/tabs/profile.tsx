@@ -1,8 +1,11 @@
   import { View, Text, Image, TouchableOpacity, FlatList } from "react-native";
   import { useState } from "react";
+  import { useSelector } from "react-redux";
+  import { RootState } from "@/redux/store";
 
   export default function ProfileScreen() {
     const [activetab, setActiveTab] = useState("Contacts")
+    const profile = useSelector((state: RootState) => state.profile.data)!
 
     const contact = [
       {

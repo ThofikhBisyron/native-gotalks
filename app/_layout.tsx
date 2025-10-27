@@ -7,6 +7,7 @@ import { PersistGate} from "redux-persist/integration/react"
 import { store, persistor } from "../redux/store"
 import Toast from 'react-native-toast-message';
 import { toastConfig } from '../components/toastConfig';
+import { Slot } from "expo-router";
 
 
 export default function RootLayout() {

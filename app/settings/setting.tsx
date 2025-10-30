@@ -31,7 +31,7 @@ export default function Setting() {
         })
         dispatch(logout())
         dispatch(deleteProfile())
-        router.push("../app/login")
+        router.push("/login")
 
     }
 

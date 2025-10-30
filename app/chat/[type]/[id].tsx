@@ -2,7 +2,7 @@ import HeaderChat from "@/components/headerChat";
 import { MaterialIcons } from "@expo/vector-icons";
 import { useLocalSearchParams, useRouter } from "expo-router";
 import { useEffect, useState } from "react";
-import { FlatList, View, Text, TouchableOpacity } from "react-native";
+import { FlatList, View, Text, TouchableOpacity, KeyboardAvoidingView, Platform } from "react-native";
 import { TextInput } from "react-native-paper";
 import { useSelector } from "react-redux";
 import Toast from "react-native-toast-message"
@@ -13,6 +13,7 @@ import { RootState } from "@/redux/store";
 export default function Chatscreen() {
     const token = useSelector((state : RootState) => state.auth.token)!
     const profile = useSelector((state : RootState) => state.profile.data)!
+    console.log(profile)
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const { id, type } = useLocalSearchParams<{ id: string; type: string }>();
     const { name, image } = useLocalSearchParams<{ name: string; image: string }>();
@@ -21,8 +22,16 @@ export default function Chatscreen() {
     const [text, setText] = useState("")
     const router = useRouter()
 
+    if (!profile) {
+    return (
+      <View className="flex-1 items-center justify-center">
+        <Text>Loading...</Text>
+      </View>
+    )
+  }
+
     interface Message {
-    id: number;
+    id?: number;
     content: string;
     created_at: string;
     sender_id: number;
@@ -111,6 +120,7 @@ export default function Chatscreen() {
             </View>
         )}  
         />
+
         <View className="flex flex-row justify-between mr-3 ml-3 mb-2">
             <TextInput mode="outlined" outlineColor="transparent" activeOutlineColor="transparent" 
             value={text}
@@ -127,9 +137,9 @@ export default function Chatscreen() {
                 {height: inputtext, minHeight:40, maxHeight:120},
                 {fontSize: 16}
             ]}
-            className="rounded-3xl w-96 bg-slate-300"
+            className="rounded-3xl w-96 bg-slate-300 pr-16"
             />
-            <TouchableOpacity className="flex-1 items-center justify-center" onPress={sendMessage}>
+            <TouchableOpacity className="absolute right-6 bottom-3 items-center" onPress={sendMessage}>
                 <MaterialIcons name="send" size={40}/>
             </TouchableOpacity>
         </View>

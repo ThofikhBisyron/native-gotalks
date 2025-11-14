@@ -2,26 +2,59 @@ import { useRouter } from "expo-router"
 import { useEffect, useState } from "react"
 import { View, Text, Image, FlatList, TouchableOpacity } from "react-native"
 import { TextInput } from "react-native-paper"
-import { useSelector } from "react-redux"
+import { useSelector, useDispatch } from "react-redux"
 import { RootState } from "@/redux/store"
 import Toast from "react-native-toast-message"
 import MaterialIcons from '@expo/vector-icons/MaterialIcons'
+import { setProfile } from "@/redux/reducers/profile";
+import { connectSocket, disconnectSocket, getSocket } from "@/utils/socket"
+import { useFocusEffect } from "expo-router";
+import { useCallback } from "react";
 
 export default function HomeScreen() {
   const token = useSelector((state : RootState) => state.auth.token)!
   const apiUrl = process.env.EXPO_PUBLIC_API_URL;
   const [chatlist, setChatlist] = useState<ChatItem[]>([])
+  const profile = useSelector((state: RootState) => state.profile.data)!
+  console.log(profile)
   const router = useRouter()
+  const dispatch = useDispatch()
 
   useEffect(() => {
-      if (token === null){
-          const timeout = setTimeout(() => {
-              router.push("/login")
-          }, 0)
-          return () => clearTimeout(timeout)
-      }
-      getChatList()
+    if (!token) {
+      router.push("/login");
+      return;
+    }
+
+    disconnectSocket(); 
+    const socket = connectSocket(token);
+
+    if (!socket) return;
+
+    socket.emit("get_chat_list"); 
+
+    socket.on("chat_list", (list: ChatItem[]) => {
+      setChatlist(list);
+    });
+
+    socket.on("new_message", () => {
+      socket.emit("get_chat_list");
+    });
+
+    return () => {  
+      socket.off("chat_list");
+      socket.off("new_message");
+    };
+  }, [token]);
+
+  useFocusEffect(
+  useCallback(() => {
+    const socket = getSocket();
+    if (socket && socket.connected) {
+      socket.emit("get_chat_list");
+    }
   }, [])
+);
 
   type ChatItem = {
   id: number,
@@ -36,27 +69,8 @@ export default function HomeScreen() {
   unread_count: number,
 };
   
-  const getChatList = async () => {
-    try{
-      const response = await fetch(`${apiUrl}/message/chatlist`, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization : "Bearer " + token 
-        },
-      })
-      const data = await response.json()
-      console.log(data)
-      if (response.ok){
-        setChatlist(data.data)
-      }
-    }catch(err){
-      Toast.show({
-        type: "general",
-        text1: "Warning",
-        text2: "Server is under maintenance"
-    })
-    }
-  }
+
+
 
   return (
     <View className="flex-1 bg-white dark:bg-black">
@@ -73,7 +87,9 @@ export default function HomeScreen() {
       data={chatlist}
       keyExtractor={(item) => item.id.toString()}
       renderItem={({item, index}) => {
-        const imageUri = item.type === 'user' ? item.image : item.group_image ? item.group_image : null
+        const imageUri = item.type === 'user'
+        ? item.image ? `${apiUrl}/uploads/profile/${item.image}` : null
+        : item.group_image ? `${apiUrl}/uploads/groups/${item.group_image}` : null;
         return(
         <TouchableOpacity className="flex flex-row gap-3 mt-1" 
         onPress={() => router.push({

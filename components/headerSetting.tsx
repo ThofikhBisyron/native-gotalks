@@ -3,7 +3,7 @@ import { useRouter } from "expo-router";
 import { View, TouchableOpacity, Text, Image } from "react-native";
 
 
-export default function HeaderSetting() {
+export default function HeaderSetting({name} : {name : string}) {
     const router = useRouter()
 
     return(
@@ -13,7 +13,10 @@ export default function HeaderSetting() {
                 <TouchableOpacity onPress={() => router.back()} className="p-2">
                     <MaterialIcons name="arrow-back" size={24} color={"#facc15"}/>
                 </TouchableOpacity>
-                <Text className="text-2xl font-semibold text-[#facc15]">Settings</Text>
+                <View className="flex flex-row">
+                    <Text className="text-2xl font-semibold text-[#facc15] mr-1">Settings</Text>
+                    <Text className="text-2xl font-semibold text-[#facc15]">{name}</Text>
+                </View>
             </View>
             </View>
         </View>

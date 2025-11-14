@@ -7,13 +7,13 @@ import { TextInput } from "react-native-paper";
 import { useSelector } from "react-redux";
 import Toast from "react-native-toast-message"
 import { RootState } from "@/redux/store";
+import { getSocket } from "@/utils/socket";
 
 
 
 export default function Chatscreen() {
     const token = useSelector((state : RootState) => state.auth.token)!
     const profile = useSelector((state : RootState) => state.profile.data)!
-    console.log(profile)
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const { id, type } = useLocalSearchParams<{ id: string; type: string }>();
     const { name, image } = useLocalSearchParams<{ name: string; image: string }>();
@@ -40,59 +40,58 @@ export default function Chatscreen() {
     }
 
     useEffect(() => { 
-        getMessage()
+        const socket = getSocket();
+
+        if (!socket) {
+        console.log("⚠️ Socket belum terkoneksi");
+        return;
+        }
+
+        if (type === "group") {
+        socket.emit("join_chat", { groupId: parseInt(id!) });
+        console.log(`📩 Join group_${id}`);
+        }
+
+        socket.emit("get_message", {
+        ...(type === "group"
+            ? { groupId: parseInt(id!) }
+            : { receiverId: parseInt(id!) }),
+        });
+
+        socket.on("message_history", (data: Message[]) => {
+        setMessages(data);
+        });
+
+        socket.on("new_message", (message: Message) => {
+        setMessages((prev) => [...prev, message]);
+        });
+
+        return () => {
+        socket.off("message_history");
+        socket.off("new_message");
+        };
 
     }, [])
 
-    const getMessage = async () => {
-        const params = type === "group" ? `groupId=${id}` : `receiverId=${id}`
-        try{
-            const response = await fetch(`${apiUrl}/message/messages?${params}`, {
-                headers: {
-                    Authorization: `Bearer ${token}`
-                }
-            })
-            const data = await response.json()
-            if (response.ok){
-                setMessages(data.data)
-            }
-        }catch(err){
-            Toast.show({
-                type: "general",
-                text1: "Warning",
-                text2: "Server is under maintenance"
-            })
-        }
-    }
-
-    const sendMessage = async () => {
+    
+    const sendMessage = () => {
         if (!text.trim()) return;
-        try{
-            const response = await fetch(`${apiUrl}/message/send`,{
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                     Authorization: `Bearer ${token}`,
-                },
-                body: JSON.stringify({
-                    ...(type === "group" ? {groupId: parseInt(id!)} : {receiverId: parseInt(id!)}),
-                    content : text
-                })
-            })
-            if (response.ok) {
-                // setText("")
-                // await getMessage()
-                const newMessage = await response.json()
-                setMessages((prevMessages) => [...prevMessages, newMessage.data])
-                setText("")
-            }
-        }catch(err){
-            Toast.show({
-                type: "general",
-                text1: "Warning",
-                text2: "Server is under maintenance"
-            })
+
+        const socket = getSocket();
+        if (!socket || !socket.connected) {
+            console.log("⚠️ Socket belum terkoneksi");
+            return;
         }
+
+        const messagePayload = {
+            content: text,
+            ...(type === "group"
+            ? { groupId: parseInt(id!) }
+            : { receiverId: parseInt(id!) }),
+        };
+
+        socket.emit("send_message", messagePayload);
+        setText("");
     }
 
 

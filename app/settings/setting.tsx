@@ -7,6 +7,7 @@ import { View, Image, Text, TouchableOpacity, useColorScheme } from "react-nativ
 import { useDispatch } from "react-redux";
 import { useRouter } from "expo-router"
 import Toast from "react-native-toast-message"
+import { disconnectSocket } from "@/utils/socket";
 
 
 
@@ -29,6 +30,7 @@ export default function Setting() {
             text1 : 'Success',
             text2 : 'Logging out..'
         })
+        disconnectSocket()
         dispatch(logout())
         dispatch(deleteProfile())
         router.push("/login")
@@ -37,7 +39,7 @@ export default function Setting() {
 
     return(
         <View className="flex-1">
-            <HeaderSetting/>
+            <HeaderSetting name= ""/>
             <View className="flex flex-row pl-3 mt-5 gap-3">
                 <Image source={{uri : contact.image}} className="w-20 h-20 rounded-full"/>
                 <View className="flex gap-2">
@@ -46,7 +48,7 @@ export default function Setting() {
                 </View>
             </View>
             <View className="flex pl-3 mt-5">
-                <TouchableOpacity className="flex flex-row gap-2 items-center">
+                <TouchableOpacity className="flex flex-row gap-2 items-center" onPress={() => router.push("/settings/account")}>
                     <MaterialIcons name="account-box" size={40} color={iconcolor} />
                     <Text className="text-xl text-black dark:text-white">Account</Text>
                 </TouchableOpacity>

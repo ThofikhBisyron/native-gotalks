@@ -16,17 +16,9 @@ export default function EditUsername() {
     const [loading, setLoading] = useState(false)
     const apiUrl = process.env.EXPO_PUBLIC_API_URL;
     const router = useRouter()
-    const [username, Setusername] = useState("")
+    const [username, Setusername] = useState("")!
     const dispatch = useDispatch()
 
-    useEffect(() => {
-        if (profile.username){
-            const timeout = setTimeout(() => {
-                router.push("/tabs/home")
-            }, 0)
-            return () => clearTimeout(timeout)
-        }
-    }, [])
 
     const editUsername = async () => {
         if (!username) {
@@ -100,7 +92,7 @@ export default function EditUsername() {
                 />
                 <TouchableOpacity
                 onPress={editUsername}
-                className="bg-slate-300 h-14 rounded-xl flex justify-center items-center px-10 mr-14 ml-14"
+                className="bg-purple-500 h-14 rounded-xl flex justify-center items-center px-10 mr-14 ml-14"
                 >
                 {loading ? 
                 (<ActivityIndicator size={"large"} color={"black"}/>) : 

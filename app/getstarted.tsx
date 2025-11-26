@@ -40,7 +40,7 @@ export default function Getstarted() {
         from={{ opacity: 0, scale: 0.8 }}
         animate={{ opacity: 1, scale: 1 }}
         transition={{ type: "timing", duration: 2000 }}
-        className="text-yellow-400 font-extrabold text-4xl text-center mt-6"
+        className="text-purple-600 font-extrabold text-4xl text-center mt-6"
       >
         Communicate Freely
       </MotiText>
@@ -60,7 +60,7 @@ export default function Getstarted() {
         transition={{ delay: 1500, duration: 800 }}
       >
         <TouchableOpacity
-          className="mt-16 bg-yellow-400 px-10 py-4 rounded-2xl shadow-lg shadow-yellow-600/40"
+          className="mt-16 bg-purple-500 px-10 py-4 rounded-2xl shadow-lg shadow-yellow-600/40"
           onPress={() => router.push("/login")}
         >
           <Text className="text-black font-bold text-2xl">Get Started</Text>

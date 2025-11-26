@@ -106,12 +106,12 @@
                     value={email}
                     onChangeText={setEmail}
                     placeholder="Email"
-                    className="w-96 h-14 bg-slate-300 pl-4 rounded-xl text-xl text-black dark:text-white"
+                    className="w-96 h-14 bg-purple-100 pl-4 rounded-xl text-xl text-black dark:text-white"
                     />
                 </View>
                 <Text className="text-center text-3xl mb-4 text-black dark:text-white">Enter Your Phone Number</Text>
                 <View className="flex flex-row mb-4 gap-4 justify-center">
-                    <View className="w-32 h-14 bg-slate-300 rounded-xl text-xl" >
+                    <View className="w-32 h-14 bg-purple-100 rounded-xl text-xl" >
                     <DropDownPicker
                         open={open}
                         value={selcountry}
@@ -123,8 +123,8 @@
                         searchPlaceholder="search"
                         placeholder="🇮🇩 +62"
                         containerStyle={{ width: "100%" }}
-                        style={{ backgroundColor: "slate-300", borderRadius: 10 }}
-                        dropDownContainerStyle={{ backgroundColor: "#ffffff" }}
+                        style={{ backgroundColor: "#f3e8ff", borderRadius: 10 }}
+                        dropDownContainerStyle={{ backgroundColor: "#f3e8ff" }}
                         textStyle={{ fontSize: 16 }}
                     />
                     </View>
@@ -132,13 +132,13 @@
                     placeholder="Phone Number"
                     value={phone}
                     onChangeText={setPhone}
-                    className="w-60 h-14 bg-slate-300 pl-4 rounded-xl text-xl text-black dark:text-white" 
+                    className="w-60 h-14 bg-purple-100 pl-4 rounded-xl text-xl text-black dark:text-white" 
                     keyboardType="phone-pad"/>
                 </View>
                 <TouchableOpacity
                 onPress={loginOrRegister}
                 disabled={loading}
-                className="bg-slate-300 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
+                className="bg-purple-500 rounded-xl h-16 flex justify-center items-center ml-20 mr-20 mt-10">
                     {loading ? (<ActivityIndicator size="large" color="black"/>) :
                     (<Text className="text-4xl text-black dark:text-white">Continue</Text>)}           
                 </TouchableOpacity>

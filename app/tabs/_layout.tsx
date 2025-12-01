@@ -1,10 +1,12 @@
 import { Tabs } from "expo-router";
 import { MaterialIcons } from "@expo/vector-icons";
 import { TouchableOpacity } from "react-native";
-import { useRouter } from "expo-router";
-import { useState } from "react";
+import { useRouter, useFocusEffect } from "expo-router";
+import { useState, useCallback } from "react";
 import HeaderRight from "@/components/headerRight";
 import { FullWindowOverlay } from "react-native-screens";
+import { BackHandler } from "react-native";
+
 
 
 export default function TabsLayout() {
@@ -14,16 +16,31 @@ export default function TabsLayout() {
   const openMenu = () => setVisible(true);
   const closeMenu = () => setVisible(false);
 
+  useFocusEffect(
+    useCallback(() => {
+      const onBackPress = () => {
+        return true;
+      };
+  
+      const subscription = BackHandler.addEventListener(
+        "hardwareBackPress",
+        onBackPress
+      );
+  
+      return () => subscription.remove();
+      }, [])
+      );
+
     return (
         <Tabs
         screenOptions={{
           headerStyle: { backgroundColor: "#1e293b" },
-          headerTintColor: "#facc15",
+          headerTintColor: "#a855f7",
           tabBarStyle: { 
             backgroundColor: "#1e293b", 
             height: 70,
              },
-          tabBarActiveTintColor: "#facc15",
+          tabBarActiveTintColor: "#a855f7",
           tabBarInactiveTintColor: "#94a3b8",
         }}
       >
